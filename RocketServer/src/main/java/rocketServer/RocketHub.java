@@ -2,10 +2,10 @@ package rocketServer;
 
 import java.io.IOException;
 
+import exceptions.RateException;
 import netgame.common.Hub;
 import rocketBase.RateBLL;
 import rocketData.LoanRequest;
-
 
 public class RocketHub extends Hub {
 
@@ -23,6 +23,19 @@ public class RocketHub extends Hub {
 			resetOutput();
 			
 			LoanRequest lq = (LoanRequest) message;
+			
+			try
+			{
+				lq.setdRate(RateBLL.getRate(lq.getiCreditScore()));
+				
+				lq.setdPayment(-(RateBLL.getPayment(lq.getiTerm(), lq.getdAmount(), 0, false)));
+			}
+			
+			catch(RateException e)
+			
+			{e.printStackTrace();
+				
+			}
 			
 			//	TODO - RocketHub.messageReceived
 

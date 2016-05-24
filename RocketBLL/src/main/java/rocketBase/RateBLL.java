@@ -1,6 +1,8 @@
 package rocketBase;
-
+import java.util.ArrayList;
 import org.apache.poi.ss.formula.functions.*;
+import exceptions.RateException;
+import rocketDomain.RateDomainModel;
 
 public class RateBLL {
 
@@ -19,8 +21,11 @@ public class RateBLL {
 		
 		//TODO - RocketBLL RateBLL.getRate
 		//			obviously this should be changed to return the determined rate
-		return 0;
 		
+		ArrayList<RateDomainModel> Rates = RateDAL.getAllRates();
+		if (GivenCreditScore >= Rate.getiMinCreditScore){
+			return Rates = Rate.getdInterestRate();
+		}
 		
 	}
 	
@@ -28,9 +33,16 @@ public class RateBLL {
 	//TODO - RocketBLL RateBLL.getPayment 
 	//		how to use:
 	//		https://poi.apache.org/apidocs/org/apache/poi/ss/formula/functions/FinanceLib.html
-	
+	//   r = rate
+	//   n = number of periods
+	//   p = payment per period
+	//   t = type
 	public static double getPayment(double r, double n, double p, double f, boolean t)
 	{		
+		double InterestRate
+		int Term
+		double value
+		
 		return FinanceLib.pmt(r, n, p, f, t);
 	}
 }

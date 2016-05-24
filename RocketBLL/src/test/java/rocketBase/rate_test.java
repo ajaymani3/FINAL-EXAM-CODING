@@ -13,8 +13,13 @@ public class rate_test {
 	//		Check to see if a RateException is thrown if there are no rates for a given
 	//		credit score
 	@Test
-	public void test() {
-		assert(1==1);
+	public void RATEtest() {
+		assertTrue(RateBLL.getRate(650) == 4.5);
+		
 	}
-
+	@Test(expected = RateException.class)
+	public void EXCEPTIONtest() throws RateException {
+		assertTrue(RateBLL.getRate(0) == 0);
+	}
+	
 }
